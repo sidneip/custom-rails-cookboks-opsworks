@@ -24,4 +24,6 @@ node[:deploy].each do |application, deploy|
       f.puts "#{name}=#{value.to_s.shellescape}"
     end
   end  
+  command "chown deploy.www-data #{deploy[:deploy_to]}/shared/.env"
+  command "chmod 755 #{deploy[:deploy_to]}/shared/.env"
 end
