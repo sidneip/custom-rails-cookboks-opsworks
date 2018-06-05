@@ -1,5 +1,0 @@
-name             'papertrail'
-maintainer       'Papertrail'
-maintainer_email 'support@papertrailapp.com'
-license          'MIT'
-description      'Installs/Configures Papertrail\'s remote_syslog2'
