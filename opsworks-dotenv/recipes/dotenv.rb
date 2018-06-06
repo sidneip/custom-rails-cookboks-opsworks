@@ -21,6 +21,7 @@ node[:deploy].each do |application, deploy|
 
   directory "#{deploy[:deploy_to]}/shared" do
     mode 0755
+    recursive true
     owner deploy[:user]
     group deploy[:group]
     action :create
