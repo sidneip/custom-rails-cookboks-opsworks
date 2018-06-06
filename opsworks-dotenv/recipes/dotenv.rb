@@ -19,6 +19,13 @@ node[:deploy].each do |application, deploy|
   
   environment_variables = deploy[:app_env].to_h.merge(deploy[:environment_variables].to_h)
 
+  directory "#{deploy[:deploy_to]}/shared" do
+    mode 0755
+    owner 'root'
+    group 'root'
+    action :create_if_missing
+  end
+
   file("#{deploy[:deploy_to]}/shared/.env") do
     mode '0755'
     owner deploy[:user]
