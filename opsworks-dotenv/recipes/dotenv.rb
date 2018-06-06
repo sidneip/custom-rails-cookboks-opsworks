@@ -18,6 +18,14 @@ node[:deploy].each do |application, deploy|
   Chef::Log.info("Generating dotenv for app: #{application} with env: #{rails_env}...")
   
   environment_variables = deploy[:app_env].to_h.merge(deploy[:environment_variables].to_h)
+
+  file("#{deploy[:deploy_to]}/shared/.env") do
+    mode '0755'
+    owner deploy[:user]
+    group deploy[:group]
+    action :create_if_missing
+  end
+
   open("#{deploy[:deploy_to]}/shared/.env", 'w') do |f|
     require 'yaml'
     environment_variables.each do |name, value|
