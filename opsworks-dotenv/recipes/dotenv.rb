@@ -21,9 +21,9 @@ node[:deploy].each do |application, deploy|
 
   directory "#{deploy[:deploy_to]}/shared" do
     mode 0755
-    owner 'root'
-    group 'root'
-    action :create_if_missing
+    owner deploy[:user]
+    group deploy[:group]
+    action :create
   end
 
   file("#{deploy[:deploy_to]}/shared/.env") do
