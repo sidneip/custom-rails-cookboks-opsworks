@@ -40,5 +40,8 @@ node[:deploy].each do |application, deploy|
     environment_variables.each do |name, value|
       f.puts "#{name}=#{value.to_s.shellescape}"
     end
+    only_if do
+      File.exists?(deploy[:deploy_to]) && File.exists?("#{deploy[:deploy_to]}/shared/")
+    end
   end  
 end
