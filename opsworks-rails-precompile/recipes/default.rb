@@ -3,6 +3,9 @@ node[:deploy].each do |application, deploy|
   current_path = deploy[:current_path]
 
   Chef::Log.info("Precompiling Rails assets with environment #{rails_env}")
+  execute 'mount -o remount,size=1G /tmp/' do
+    user 'root'
+  end
 
   execute 'rake assets:precompile' do
     cwd current_path
