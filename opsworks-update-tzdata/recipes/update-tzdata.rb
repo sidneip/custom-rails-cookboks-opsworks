@@ -9,3 +9,7 @@ dpkg_package "tzdata" do
   puts 't' 
   action :install
 end
+
+execute "reload datetime" do
+  command "dpkg-reconfigure --frontend noninteractive tzdata"
+end
